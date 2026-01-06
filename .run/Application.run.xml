@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="store" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="com.ramona.capstone.StoreApplication" />
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <module name="capstone" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.ramona.capstone.VeloDriveApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

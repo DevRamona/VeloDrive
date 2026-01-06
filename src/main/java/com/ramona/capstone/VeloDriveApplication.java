@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StoreApplication {
+public class VeloDriveApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StoreApplication.class, args);
+        SpringApplication.run(VeloDriveApplication.class, args);
+        System.out.println("Capstone Project");
     }
 }
