@@ -1,26 +1,24 @@
 package com.ramona.capstone.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "brands")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Category {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Category parent;
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    private List<Category> children = new ArrayList<>();
-
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 }

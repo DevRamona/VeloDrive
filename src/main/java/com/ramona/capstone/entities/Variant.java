@@ -2,13 +2,16 @@ package com.ramona.capstone.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "variants")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Variant {
     @Id
