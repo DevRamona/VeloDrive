@@ -1,6 +1,7 @@
 package com.ramona.capstone.services;
 
 import com.ramona.capstone.dtos.ProductDto;
+import com.ramona.capstone.exceptions.ResourceNotFoundException;
 import com.ramona.capstone.mappers.ProductMapper;
 import com.ramona.capstone.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,6 @@ public class ProductService {
     public ProductDto getProductById(Long id) {
         return productRepository.findById(id)
                 .map(productMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID:" + id));
     }
 }

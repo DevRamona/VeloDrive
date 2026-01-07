@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>17</java.version>
+        <flyway.version>10.21.0</flyway.version> <!-- Updated to 10.21.0 -->
     </properties>
     <dependencies>
         <dependency>
@@ -58,9 +59,17 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Explicitly specify Flyway version -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
         </dependency>
 
         <dependency>
@@ -97,16 +106,12 @@
             <version>2.8.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
@@ -168,7 +173,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.15.0</version>
+                <version>${flyway.version}</version>
                 <configuration>
                     <url>jdbc:postgresql://localhost:5432/velodrive_db</url>
                     <user>admin</user>
@@ -177,7 +182,6 @@
                     <driver>org.postgresql.Driver</driver>
                 </configuration>
                 <dependencies>
-                    <!-- PostgreSQL JDBC Driver -->
                     <dependency>
                         <groupId>org.postgresql</groupId>
                         <artifactId>postgresql</artifactId>
@@ -186,7 +190,7 @@
                     <dependency>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-database-postgresql</artifactId>
-                        <version>10.15.0</version>
+                        <version>${flyway.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

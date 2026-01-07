@@ -22,7 +22,7 @@ public class Product {
     private String name;
     private String description;
     @Column(name = "base_price")
-    private BigDecimal base_price;
+    private BigDecimal basePrice;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

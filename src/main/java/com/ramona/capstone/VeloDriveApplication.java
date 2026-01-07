@@ -8,6 +8,5 @@ public class VeloDriveApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VeloDriveApplication.class, args);
-        System.out.println("Capstone Project");
     }
 }
