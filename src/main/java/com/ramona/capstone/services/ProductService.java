@@ -28,6 +28,12 @@ public class ProductService {
                 .map(productMapper::toDto)
                 .toList();
     }
+    public List<ProductDto> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(productMapper::toDto)
+                .toList();
+    }
     public ProductDto getProductById(Long id) {
         return productRepository.findById(id)
                 .map(productMapper::toDto)
@@ -53,4 +59,11 @@ public class ProductService {
         return productMapper.toDto(productRepository.save(product));
 
     }
+    public void deleteProduct(Long id) {
+        if(!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Product not found with ID:" + id);
+        }
+        productRepository.deleteById(id);
+    }
+
 }
