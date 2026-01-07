@@ -41,4 +41,16 @@ public class ProductService {
         product.setBrand(brand);
         return productMapper.toDto(productRepository.save(product));
     }
+    public ProductDto updateProduct(Long id, ProductDto productDto) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with ID:" + id));
+        product.setName(productDto.getName());
+        product.setDescription(productDto.getDescription());
+        product.setBasePrice(productDto.getBasePrice());
+        Category category = categoryRepository.findByName(productDto.getCategoryName()).orElseThrow(() -> new ResourceNotFoundException("Category not found: " + productDto.getCategoryName()));
+        Brand brand = brandRepository.findByName(productDto.getBrandName()).orElseThrow(() -> new ResourceNotFoundException("Brand not found: " + productDto.getBrandName()));
+        product.setBrand(brand);
+        product.setCategory(category);
+        return productMapper.toDto(productRepository.save(product));
+
+    }
 }
