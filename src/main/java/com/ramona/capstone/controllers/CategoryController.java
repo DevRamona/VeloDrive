@@ -2,12 +2,11 @@ package com.ramona.capstone.controllers;
 
 import com.ramona.capstone.dtos.CategoryDto;
 import com.ramona.capstone.services.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +22,19 @@ public class CategoryController {
     @GetMapping("/{parentId}/children")
     public ResponseEntity <List<CategoryDto>> getSubCategories(@PathVariable Long parentId){
         return ResponseEntity.ok(categoryService.getSubCategories(parentId));
+    }
+    @PostMapping
+    public ResponseEntity<CategoryDto> addNewCategory(@Valid @RequestBody CategoryDto categoryDto) {
+        return new ResponseEntity<>(categoryService.createCategory(categoryDto), HttpStatus.CREATED);
+
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDto> updateExistingCategory(@PathVariable Long id, @Valid @RequestBody CategoryDto categoryDto) {
+        return new ResponseEntity<>(categoryService.updateCategory(id, categoryDto), HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 }

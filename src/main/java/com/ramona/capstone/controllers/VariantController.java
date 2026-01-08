@@ -1,6 +1,7 @@
 package com.ramona.capstone.controllers;
 
 import com.ramona.capstone.dtos.VariantDto;
+import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.services.VariantService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +29,12 @@ public class VariantController {
         return ResponseEntity.ok(variantService.getVariantById(productId, variantId));
     }
     @PostMapping
-    public ResponseEntity<VariantDto> addVariant( @PathVariable Long productId,@Valid @RequestBody VariantDto variantDto) {
-        return new ResponseEntity<>(variantService.createVariant(productId,variantDto), HttpStatus.CREATED);
+    public ResponseEntity<VariantDto> addVariant( @PathVariable Long productId,@Valid @RequestBody VariantRequestDto request) {
+        return new ResponseEntity<>(variantService.createVariant(productId,request), HttpStatus.CREATED);
     }
     @PutMapping("/{variantId}")
-    public ResponseEntity<VariantDto> updateVariant(@PathVariable Long variantId,@PathVariable Long productId,@Valid @RequestBody VariantDto variantDto) {
-        return new ResponseEntity<>(variantService.updateVariantById(productId,variantId,variantDto), HttpStatus.OK);
+    public ResponseEntity<VariantDto> updateExistingVariant(@PathVariable Long variantId,@PathVariable Long productId,@Valid @RequestBody VariantRequestDto request) {
+        return new ResponseEntity<>(variantService.updateVariantById(productId,variantId,request), HttpStatus.OK);
     }
     @DeleteMapping("/{variantId}")
     public ResponseEntity<Void> deleteVariant(@PathVariable Long variantId,@PathVariable Long productId) {

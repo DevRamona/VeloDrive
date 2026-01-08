@@ -1,6 +1,7 @@
 package com.ramona.capstone.mappers;
 
 import com.ramona.capstone.dtos.VariantDto;
+import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.entities.Variant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,5 +12,5 @@ public interface VariantMapper {
     @Mapping(source = "product.name", target = "productName")
     VariantDto toDto(Variant variant);
     @Mapping(target = "product", ignore = true)
-    Variant toEntity(VariantDto variantDto);
+    Variant toEntity(VariantRequestDto request);
 }

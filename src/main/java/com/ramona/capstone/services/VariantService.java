@@ -1,6 +1,7 @@
 package com.ramona.capstone.services;
 
 import com.ramona.capstone.dtos.VariantDto;
+import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.entities.Product;
 import com.ramona.capstone.entities.Variant;
 import com.ramona.capstone.exceptions.ResourceNotFoundException;
@@ -38,9 +39,9 @@ public class VariantService {
                 .toList();
     }
     @Transactional
-    public VariantDto createVariant(Long productId, VariantDto variantDto) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Cannot add variant. Product not found with ID:" + variantDto.getProductId()));
-        Variant variant = variantMapper.toEntity(variantDto);
+    public VariantDto createVariant(Long productId, VariantRequestDto request ) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Cannot add variant. Product not found with ID:" + productId));
+        Variant variant = variantMapper.toEntity(request);
         variant.setProduct(product);
         return variantMapper.toDto(variantRepository.save(variant));
     }
@@ -52,13 +53,13 @@ public class VariantService {
                 .orElseThrow(() -> new ResourceNotFoundException("Variant not found with ID:" + variantId));
     }
     @Transactional
-    public VariantDto updateVariantById(Long productId, Long variantId, VariantDto variantDto) {
+    public VariantDto updateVariantById(Long productId, Long variantId, VariantRequestDto request) {
         Variant variant = variantRepository.findById(variantId).orElseThrow(() -> new ResourceNotFoundException("Variant not found with ID:" + variantId));
-        variant.setColor(variantDto.getColor());
-        variant.setPrice(variantDto.getPrice());
-        variant.setSku(variantDto.getSku());
-        variant.setQuantity(variantDto.getQuantity());
-        variant.setFuelType(variantDto.getFuelType());
+        variant.setColor(request.getColor());
+        variant.setPrice(request.getPrice());
+        variant.setSku(request.getSku());
+        variant.setQuantity(request.getQuantity());
+        variant.setFuelType(request.getFuelType());
         return variantMapper.toDto(variantRepository.save(variant));
     }
     @Transactional

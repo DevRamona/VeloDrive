@@ -9,6 +9,7 @@ import com.ramona.capstone.mappers.ProductMapper;
 import com.ramona.capstone.repositories.BrandRepository;
 import com.ramona.capstone.repositories.CategoryRepository;
 import com.ramona.capstone.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class ProductService {
                 .map(productMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID:" + id));
     }
+    @Transactional
     public ProductDto createProduct(ProductDto productDto) {
         Product product = productMapper.toEntity(productDto);
         Category category = categoryRepository.findByName(productDto.getCategoryName()).orElseThrow(() -> new ResourceNotFoundException("Category not found: " + productDto.getCategoryName()));
@@ -47,6 +49,7 @@ public class ProductService {
         product.setBrand(brand);
         return productMapper.toDto(productRepository.save(product));
     }
+    @Transactional
     public ProductDto updateProduct(Long id, ProductDto productDto) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with ID:" + id));
         product.setName(productDto.getName());
@@ -59,6 +62,7 @@ public class ProductService {
         return productMapper.toDto(productRepository.save(product));
 
     }
+    @Transactional
     public void deleteProduct(Long id) {
         if(!productRepository.existsById(id)) {
             throw new ResourceNotFoundException("Product not found with ID:" + id);
