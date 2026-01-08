@@ -21,6 +21,7 @@ public class Variant {
     private BigDecimal price;
     private String sku;
     private Integer quantity;
+    private String fuelType;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
