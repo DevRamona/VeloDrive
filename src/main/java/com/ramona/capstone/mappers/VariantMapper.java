@@ -11,6 +11,8 @@ public interface VariantMapper {
     @Mapping(source ="product.id", target = "productId")
     @Mapping(source = "product.name", target = "productName")
     VariantDto toDto(Variant variant);
+
     @Mapping(target = "product", ignore = true)
     Variant toEntity(VariantRequestDto request);
+
 }

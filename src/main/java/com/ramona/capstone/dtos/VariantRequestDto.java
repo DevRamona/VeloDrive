@@ -15,14 +15,18 @@ import java.math.BigDecimal;
 public class VariantRequestDto {
     @NotBlank(message = "Color is required")
     private String color;
+
     @NotBlank(message = "Sku is required")
     private String sku;
+
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be positive")
     private BigDecimal price;
+
     @NotNull(message = "Quantity is required")
     @Min(value = 0, message = "Quantity must be positive")
     private Integer quantity;
+
     @NotBlank(message = "Fuel type is required")
     private String fuelType;
 }

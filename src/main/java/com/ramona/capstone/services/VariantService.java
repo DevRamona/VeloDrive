@@ -9,9 +9,10 @@ import com.ramona.capstone.mappers.VariantMapper;
 import com.ramona.capstone.repositories.ProductRepository;
 import com.ramona.capstone.repositories.VariantRepository;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.ramona.capstone.dtos.UpdateStockDto;
+
 
 import java.util.List;
 
@@ -72,5 +73,11 @@ public class VariantService {
         }
 
         variantRepository.delete(variant);
+    }
+    @Transactional
+    public VariantDto updateStock(String sku, UpdateStockDto stockUpdate) {
+        Variant variant = variantRepository.findBySku(sku).orElseThrow(() -> new ResourceNotFoundException("Variant with SKU" + sku + "not found"));
+        variant.setQuantity(stockUpdate.getQuantity());
+        return variantMapper.toDto(variantRepository.save(variant));
     }
 }

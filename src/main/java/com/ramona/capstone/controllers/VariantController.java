@@ -1,5 +1,6 @@
 package com.ramona.capstone.controllers;
 
+import com.ramona.capstone.dtos.UpdateStockDto;
 import com.ramona.capstone.dtos.VariantDto;
 import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.services.VariantService;
