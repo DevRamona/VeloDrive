@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,11 +25,11 @@ public class Orders {
     @JoinColumn(name = "user_id",  nullable = false)
     private User user;
     @Column(name = "total_amount")
-    private BigDecimal total_amount;
+    private BigDecimal totalAmount;
     @Column(name="placed_at")
     private LocalDateTime placedAt;
-    @OneToMany(MappedBy="order", orphanRemoval = true)
-    private List<OrderItems> items = new ArrayList<>();
+    @OneToMany(mappedBy ="order",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItems> orderItems = new ArrayList<>();
 
 
 
