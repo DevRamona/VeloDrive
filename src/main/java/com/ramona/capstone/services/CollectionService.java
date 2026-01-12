@@ -24,8 +24,11 @@ public class CollectionService {
         Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("Product not found"));
         if(!collection.getProducts().contains(product)) {
             collection.getProducts().add(product);
+
         }
         collectionRepository.save(collection);
+
+
     }
     @Transactional
     public CollectionDto createCollection(CollectionRequestDto request) {
