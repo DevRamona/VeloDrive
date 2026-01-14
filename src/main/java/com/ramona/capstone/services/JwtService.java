@@ -1,5 +1,6 @@
-package com.ramona.capstone.config;
+package com.ramona.capstone.services;
 
+import com.ramona.capstone.config.JwtConfig;
 import com.ramona.capstone.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -9,8 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@AllArgsConstructor
+
 @Service
+@AllArgsConstructor
 public class JwtService {
     private final JwtConfig jwtConfig;
 
@@ -29,7 +31,7 @@ public class JwtService {
                 .add("name", user.getName())
                 .add("role", user.getRole())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
+                .expiration(new Date(System.currentTimeMillis() + tokenExpiration))
                 .build();
 
         return new Jwt(claims, jwtConfig.getSecretKey());

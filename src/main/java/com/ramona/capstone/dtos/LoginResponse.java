@@ -1,7 +1,7 @@
-package com.ramona.capstone.config;
+package com.ramona.capstone.dtos;
 
+import com.ramona.capstone.services.Jwt;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @AllArgsConstructor

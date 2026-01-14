@@ -1,5 +1,6 @@
 package com.ramona.capstone.config;
 
+import com.ramona.capstone.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

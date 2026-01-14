@@ -1,4 +1,4 @@
-package com.ramona.capstone.config;
+package com.ramona.capstone.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

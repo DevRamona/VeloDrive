@@ -1,4 +1,4 @@
-package com.ramona.capstone.config;
+package com.ramona.capstone.services;
 
 import com.ramona.capstone.models.Role;
 import io.jsonwebtoken.Claims;

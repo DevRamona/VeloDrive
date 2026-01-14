@@ -7,7 +7,6 @@ import com.ramona.capstone.entities.Variant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.boot.context.properties.bind.Name;
 
 @Mapper(componentModel = "spring")
 public interface PublicMapper {
