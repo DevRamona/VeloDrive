@@ -1,5 +1,6 @@
 package com.ramona.capstone.controllers;
 
+import com.ramona.capstone.dtos.ApiResponse;
 import com.ramona.capstone.dtos.CollectionDto;
 import com.ramona.capstone.dtos.CollectionRequestDto;
 import com.ramona.capstone.services.CollectionService;
@@ -20,8 +21,8 @@ public class CollectionController {
     }
 
     @PostMapping("/{collectionId}/products/{productId}")
-    public ResponseEntity<Void>createProductToCollection(@PathVariable Long collectionId, @PathVariable Long productId) {
-        collectionService.addProductToCollection(collectionId, productId);
-        return ResponseEntity.ok().build();
+    public ResponseEntity <ApiResponse<String>>createProductToCollection(@PathVariable Long collectionId, @PathVariable Long productId) {
+     collectionService.addProductToCollection(collectionId, productId);
+        return ResponseEntity.ok(new ApiResponse<>("Product has been successfully added to the collection.", productId));
     }
 }

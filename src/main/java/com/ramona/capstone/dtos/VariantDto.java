@@ -30,9 +30,5 @@ public class VariantDto {
     @NotBlank(message = "Fuel type is required")
     private String fuelType;
 
-    private Long productId;
-
-    private String productName;
-
 
 }

@@ -4,11 +4,14 @@ import com.ramona.capstone.dtos.ProductDto;
 import com.ramona.capstone.entities.Brand;
 import com.ramona.capstone.entities.Category;
 import com.ramona.capstone.entities.Product;
+import com.ramona.capstone.entities.Variant;
+import com.ramona.capstone.exceptions.DuplicateSkuException;
 import com.ramona.capstone.exceptions.ResourceNotFoundException;
 import com.ramona.capstone.mappers.ProductMapper;
 import com.ramona.capstone.repositories.BrandRepository;
 import com.ramona.capstone.repositories.CategoryRepository;
 import com.ramona.capstone.repositories.ProductRepository;
+import com.ramona.capstone.repositories.VariantRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,7 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
+    private final VariantRepository variantRepository;
 
     public List<ProductDto> getProductsByCategory(Long categoryId) {
         return productRepository.findByCategoryId(categoryId)
@@ -42,11 +46,24 @@ public class ProductService {
     }
     @Transactional
     public ProductDto createProduct(ProductDto productDto) {
-        Product product = productMapper.toEntity(productDto);
         Category category = categoryRepository.findByName(productDto.getCategoryName()).orElseThrow(() -> new ResourceNotFoundException("Category not found: " + productDto.getCategoryName()));
-        Brand brand = brandRepository.findByName(productDto.getBrandName()).orElseThrow(() -> new ResourceNotFoundException("Brand not found: " + productDto.getBrandName()));
+        if(!category.getChildren().isEmpty()) {
+            throw new IllegalArgumentException("Products must be assigned to a category");
+        }
+        Product product = productMapper.toEntity(productDto);
         product.setCategory(category);
+        Brand brand = brandRepository.findByName(productDto.getBrandName()).orElseThrow(() -> new ResourceNotFoundException("Brand not found: " + productDto.getBrandName()));
         product.setBrand(brand);
+
+        if(product.getVariants()!=null){
+            for(Variant variant: product.getVariants()){
+                if(variantRepository.existsBySku(variant.getSku())){
+                    throw new DuplicateSkuException("SKU" +  variant.getSku() + " already exists");
+                }
+                variant.setProduct(product);
+            }
+        }
+
         return productMapper.toDto(productRepository.save(product));
     }
     @Transactional

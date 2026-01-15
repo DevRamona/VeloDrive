@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CollectionDto {
-    private String name;
-    private List<ProductDto> product = new ArrayList<>();
+public class ApiResponse<T> {
+    private String message;
+    private Long productId;
 }
