@@ -1,5 +1,6 @@
 package com.ramona.capstone.dtos;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,4 +33,7 @@ public class ProductDto {
 
     @NotBlank(message = "Brand name is required")
     private String brandName;
+    @NotNull(message = "At least one variant is required")
+    @Valid
+    private List<VariantDto> variants;
 }

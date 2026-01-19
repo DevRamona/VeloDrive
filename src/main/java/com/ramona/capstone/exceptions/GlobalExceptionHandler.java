@@ -27,5 +27,12 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(DuplicateSkuException.class)
+    public ResponseEntity<Object> handleDuplicateSku(DuplicateSkuException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("error", "Duplicate SKU detected");
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
 
 }
