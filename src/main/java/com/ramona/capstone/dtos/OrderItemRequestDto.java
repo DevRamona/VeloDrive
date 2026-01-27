@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemRequestDto {
-    @NotNull(message = "Variant ID is required")
-    private Long variantId;
-    @NotNull(message = "Quantity is required ")
-    @Positive(message = "Quantity must be greater than zero")
-    private Integer quantity;
+  @NotNull(message = "Variant ID is required")
+  private Long variantId;
 
-
+  @NotNull(message = "Quantity is required ")
+  @Positive(message = "Quantity must be greater than zero")
+  private Integer quantity;
 }

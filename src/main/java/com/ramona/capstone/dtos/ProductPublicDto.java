@@ -1,13 +1,11 @@
 package com.ramona.capstone.dtos;
 
-
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class ProductPublicDto {
-    private String name;
-    private String categoryName;
-    private List<VariantPublicDto> variants;
+  private String name;
+  private String categoryName;
+  private List<VariantPublicDto> variants;
 }

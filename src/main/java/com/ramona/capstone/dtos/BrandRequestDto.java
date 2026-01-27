@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandRequestDto {
-    @NotBlank(message = "Brand name is required")
-    private String name;
+  @NotBlank(message = "Brand name is required")
+  private String name;
 }

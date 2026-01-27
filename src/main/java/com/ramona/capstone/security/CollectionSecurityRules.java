@@ -6,8 +6,10 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.stereotype.Component;
 
 @Component
-public class CollectionSecurityRules implements SecurityRules{
-    public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers("/categories/**").hasRole(Role.ADMIN.name());
-    }
+public class CollectionSecurityRules implements SecurityRules {
+  public void configure(
+      AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry) {
+    registry.requestMatchers("/categories/**").hasRole(Role.ADMIN.name());
+  }
 }

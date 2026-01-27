@@ -6,9 +6,11 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderSecurityRules implements  SecurityRules{
-    @Override
-    public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers("/orders/**").hasRole(Role.USER.name());
-    }
+public class OrderSecurityRules implements SecurityRules {
+  @Override
+  public void configure(
+      AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry) {
+    registry.requestMatchers("/orders/**").hasRole(Role.USER.name());
+  }
 }

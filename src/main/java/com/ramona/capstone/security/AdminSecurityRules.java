@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdminSecurityRules implements SecurityRules {
-    @Override
-    public void configure (AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers("/admin/**").hasRole(Role.ADMIN.name());
-    }
+  @Override
+  public void configure(
+      AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry) {
+    registry.requestMatchers("/admin/**").hasRole(Role.ADMIN.name());
+  }
 }

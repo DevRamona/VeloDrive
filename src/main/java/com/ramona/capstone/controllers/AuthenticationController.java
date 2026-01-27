@@ -20,36 +20,37 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthenticationController {
-    private final JwtConfig jwtConfig;
-    private final UserMapper userMapper;
-    private final AuthenticationService authenticationService;
+  private final JwtConfig jwtConfig;
+  private final UserMapper userMapper;
+  private final AuthenticationService authenticationService;
 
-    @PostMapping("/login")
-    public JwtResponse login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) {
-        var loginResult = authenticationService.login(loginRequest);
-        var refreshToken = loginResult.getRefreshToken().toString();
-        var cookie = new Cookie("refreshToken", refreshToken);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/auth/refresh");
-        cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration());
-        cookie.setSecure(true);
-        httpServletResponse.addCookie(cookie);
-        return new JwtResponse(loginResult.getAccessToken().toString());
-    }
-    @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@Valid @RequestBody RegisterUserRequest userRequest){
-        var userDto = authenticationService.register(userRequest);
-        return ResponseEntity.ok(userDto);
+  @PostMapping("/login")
+  public JwtResponse login(
+      @Valid @RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) {
+    var loginResult = authenticationService.login(loginRequest);
+    var refreshToken = loginResult.getRefreshToken().toString();
+    var cookie = new Cookie("refreshToken", refreshToken);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/auth/refresh");
+    cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration());
+    cookie.setSecure(true);
+    httpServletResponse.addCookie(cookie);
+    return new JwtResponse(loginResult.getAccessToken().toString());
+  }
 
-    }
-    public JwtResponse refresh(@CookieValue(value="refreshToken") String refreshToken) {
-        var accessToken = authenticationService.refreshToken(refreshToken);
-        return new  JwtResponse(accessToken.toString());
-    }
+  @PostMapping("/register")
+  public ResponseEntity<UserDto> register(@Valid @RequestBody RegisterUserRequest userRequest) {
+    var userDto = authenticationService.register(userRequest);
+    return ResponseEntity.ok(userDto);
+  }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Void> handleBadCredentialsException() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
+  public JwtResponse refresh(@CookieValue(value = "refreshToken") String refreshToken) {
+    var accessToken = authenticationService.refreshToken(refreshToken);
+    return new JwtResponse(accessToken.toString());
+  }
 
+  @ExceptionHandler(BadCredentialsException.class)
+  public ResponseEntity<Void> handleBadCredentialsException() {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+  }
 }

@@ -8,10 +8,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = ProductMapper.class)
 public interface CollectionMapper {
-    CollectionDto toDto(Collection collection);
+  CollectionDto toDto(Collection collection);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "products", ignore = true)
-    Collection toEntity(CollectionRequestDto request);
-
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "products", ignore = true)
+  Collection toEntity(CollectionRequestDto request);
 }

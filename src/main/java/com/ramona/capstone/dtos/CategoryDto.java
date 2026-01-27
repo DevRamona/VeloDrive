@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryDto {
 
-    private Long id;
-    @NotBlank(message = "Category name is required")
-    private String name;
-    @NotNull(message = "Parent category is required")
-    private Long parentId;
-    @NotBlank(message = "Parent category name is required")
-    private String parentName;
+  private Long id;
 
+  @NotBlank(message = "Category name is required")
+  private String name;
+
+  @NotNull(message = "Parent category is required")
+  private Long parentId;
+
+  @NotBlank(message = "Parent category name is required")
+  private String parentName;
 }

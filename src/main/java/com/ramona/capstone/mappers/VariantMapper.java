@@ -8,10 +8,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface VariantMapper {
-    VariantDto toDto(Variant variant);
+  VariantDto toDto(Variant variant);
 
-    @Mapping(target = "product", ignore = true)
-    @Mapping(target = "id", ignore = true)
-    Variant toEntity(VariantRequestDto request);
-
+  @Mapping(target = "product", ignore = true)
+  @Mapping(target = "id", ignore = true)
+  Variant toEntity(VariantRequestDto request);
 }

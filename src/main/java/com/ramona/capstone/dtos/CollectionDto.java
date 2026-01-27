@@ -1,16 +1,15 @@
 package com.ramona.capstone.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CollectionDto {
-    private String name;
-    private List<ProductDto> product = new ArrayList<>();
+  private String name;
+  private List<ProductDto> product = new ArrayList<>();
 }

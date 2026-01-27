@@ -5,35 +5,36 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    private Long id;
-    @NotBlank(message = "Product name is required")
-    @Size(min =2, max = 50, message = "Product name must be between 2 and 50 characters")
-    private String name;
+  private Long id;
 
-    @NotBlank(message = "Product description is required")
-    private String description;
+  @NotBlank(message = "Product name is required")
+  @Size(min = 2, max = 50, message = "Product name must be between 2 and 50 characters")
+  private String name;
 
-    @NotNull(message = "Base price is required")
-    @Positive(message = "Base price must be positive")
-    private BigDecimal basePrice;
+  @NotBlank(message = "Product description is required")
+  private String description;
 
-    @NotBlank(message = "Category name is required")
-    private String categoryName;
+  @NotNull(message = "Base price is required")
+  @Positive(message = "Base price must be positive")
+  private BigDecimal basePrice;
 
-    @NotBlank(message = "Brand name is required")
-    private String brandName;
-    @NotNull(message = "At least one variant is required")
-    @Valid
-    private List<VariantDto> variants;
+  @NotBlank(message = "Category name is required")
+  private String categoryName;
+
+  @NotBlank(message = "Brand name is required")
+  private String brandName;
+
+  @NotNull(message = "At least one variant is required")
+  @Valid
+  private List<VariantDto> variants;
 }
