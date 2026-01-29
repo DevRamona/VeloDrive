@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponse<T> {
-    private String message;
-    private Long productId;
+  private String message;
+  private Long productId;
 }

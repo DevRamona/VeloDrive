@@ -2,12 +2,11 @@ package com.ramona.capstone.dtos;
 
 import com.ramona.capstone.services.Jwt;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class LoginResponse {
-    private Jwt accessToken;
-    private Jwt refreshToken;
-
+  private Jwt accessToken;
+  private Jwt refreshToken;
 }

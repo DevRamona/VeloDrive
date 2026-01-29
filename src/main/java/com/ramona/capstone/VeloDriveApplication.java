@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class VeloDriveApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(VeloDriveApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(VeloDriveApplication.class, args);
+  }
 }

@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface BrandMapper {
-    BrandDto toDto(Brand brand);
-    Brand toEntity(BrandRequestDto request);
+  BrandDto toDto(Brand brand);
 
+  Brand toEntity(BrandRequestDto request);
 }

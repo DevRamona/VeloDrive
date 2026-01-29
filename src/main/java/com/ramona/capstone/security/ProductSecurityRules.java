@@ -7,11 +7,18 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductSecurityRules implements SecurityRules{
-    public void configure (AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers(HttpMethod.GET, "/product/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/product/**").hasRole(Role.ADMIN.name())
-                .requestMatchers(HttpMethod.PUT, "/product/**").hasRole(Role.ADMIN.name())
-                .requestMatchers(HttpMethod.DELETE, "/product/**").hasRole(Role.ADMIN.name());
-    }
+public class ProductSecurityRules implements SecurityRules {
+  public void configure(
+      AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry) {
+    registry
+        .requestMatchers(HttpMethod.GET, "/product/**")
+        .permitAll()
+        .requestMatchers(HttpMethod.POST, "/product/**")
+        .hasRole(Role.ADMIN.name())
+        .requestMatchers(HttpMethod.PUT, "/product/**")
+        .hasRole(Role.ADMIN.name())
+        .requestMatchers(HttpMethod.DELETE, "/product/**")
+        .hasRole(Role.ADMIN.name());
+  }
 }

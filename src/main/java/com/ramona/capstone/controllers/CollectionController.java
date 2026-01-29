@@ -14,15 +14,19 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/collections")
 public class CollectionController {
-    private final CollectionService collectionService;
-    @PostMapping
-    public ResponseEntity<CollectionDto> addNewCollection(@Valid @RequestBody CollectionRequestDto request) {
-        return new ResponseEntity<>(collectionService.createCollection(request),  HttpStatus.CREATED);
-    }
+  private final CollectionService collectionService;
 
-    @PostMapping("/{collectionId}/products/{productId}")
-    public ResponseEntity <ApiResponse<String>>createProductToCollection(@PathVariable Long collectionId, @PathVariable Long productId) {
-     collectionService.addProductToCollection(collectionId, productId);
-        return ResponseEntity.ok(new ApiResponse<>("Product has been successfully added to the collection.", productId));
-    }
+  @PostMapping
+  public ResponseEntity<CollectionDto> addNewCollection(
+      @Valid @RequestBody CollectionRequestDto request) {
+    return new ResponseEntity<>(collectionService.createCollection(request), HttpStatus.CREATED);
+  }
+
+  @PostMapping("/{collectionId}/products/{productId}")
+  public ResponseEntity<ApiResponse<String>> createProductToCollection(
+      @PathVariable Long collectionId, @PathVariable Long productId) {
+    collectionService.addProductToCollection(collectionId, productId);
+    return ResponseEntity.ok(
+        new ApiResponse<>("Product has been successfully added to the collection.", productId));
+  }
 }

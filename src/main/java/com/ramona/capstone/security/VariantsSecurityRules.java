@@ -6,9 +6,11 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.stereotype.Component;
 
 @Component
-public class VariantsSecurityRules implements SecurityRules{
-    @Override
-    public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers("/product/{productId}/variants").hasRole(Role.ADMIN.name());
-    }
+public class VariantsSecurityRules implements SecurityRules {
+  @Override
+  public void configure(
+      AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry
+          registry) {
+    registry.requestMatchers("/product/{productId}/variants").hasRole(Role.ADMIN.name());
+  }
 }

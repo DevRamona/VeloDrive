@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/inventory")
 public class InventoryController {
-    private final VariantService variantService;
-    @PatchMapping("/sku/{sku}/stock")
-    public ResponseEntity<VariantDto> updateStockBySku(@PathVariable String sku, @RequestBody UpdateStockDto updateDto) {
-        return ResponseEntity.ok(variantService.updateStock(sku, updateDto));
-    }
+  private final VariantService variantService;
+
+  @PatchMapping("/sku/{sku}/stock")
+  public ResponseEntity<VariantDto> updateStockBySku(
+      @PathVariable String sku, @RequestBody UpdateStockDto updateDto) {
+    return ResponseEntity.ok(variantService.updateStock(sku, updateDto));
+  }
 }
