@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import com.ramona.capstone.dtos.ProductDto;
 import com.ramona.capstone.dtos.VariantDto;
 import com.ramona.capstone.entities.Brand;
 import com.ramona.capstone.entities.Category;

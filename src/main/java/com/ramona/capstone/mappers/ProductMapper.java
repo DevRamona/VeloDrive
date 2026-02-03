@@ -1,6 +1,7 @@
 package com.ramona.capstone.mappers;
 
-import com.ramona.capstone.dtos.ProductDto;
+import com.ramona.capstone.dtos.ProductRequestDto;
+import com.ramona.capstone.dtos.ProductResponseDto;
 import com.ramona.capstone.entities.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,9 +10,10 @@ import org.mapstruct.Mapping;
 public interface ProductMapper {
   @Mapping(source = "category.name", target = "categoryName")
   @Mapping(source = "brand.name", target = "brandName")
-  ProductDto toDto(Product product);
+  ProductResponseDto toDto(Product product);
 
-  @Mapping(source = "categoryName", target = "category.name")
-  @Mapping(source = "brandName", target = "brand.name")
-  Product toEntity(ProductDto productDto);
+  @Mapping( target = "id", ignore = true)
+  @Mapping( target = "brand", ignore = true)
+  @Mapping(target = "category", ignore = true)
+  Product toEntity(ProductRequestDto productDto);
 }
