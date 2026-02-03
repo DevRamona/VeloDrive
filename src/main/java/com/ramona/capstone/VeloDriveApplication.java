@@ -13,10 +13,4 @@ public class VeloDriveApplication {
     SpringApplication.run(VeloDriveApplication.class, args);
   }
 
-  @Bean
-  CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate) {
-      return args -> {
-          kafkaTemplate.send("capstone-kafka", "Hello Kafka Producer");
-      };
-  }
 }

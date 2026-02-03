@@ -1,8 +1,7 @@
 package com.ramona.capstone.services;
 
-import com.ramona.capstone.dtos.CheckOutResponse;
-import com.ramona.capstone.dtos.OrderRequestDto;
-import com.ramona.capstone.dtos.OrderResponseDto;
+import com.ramona.capstone.config.KafkaTopicConfig;
+import com.ramona.capstone.dtos.*;
 import com.ramona.capstone.entities.OrderItems;
 import com.ramona.capstone.entities.Orders;
 import com.ramona.capstone.entities.User;
@@ -20,8 +19,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -29,6 +30,7 @@ public class OrderService {
   private final UserRepository userRepository;
   private final VariantRepository variantRepository;
   private final OrderMapper orderMapper;
+  private final KafkaTemplate<String, Object> kafkaTemplate;
 
   @Transactional
   public OrderResponseDto createOrder(OrderRequestDto orderRequest) {
@@ -68,6 +70,23 @@ public class OrderService {
     }
     orders.setTotalAmount(totalAmount);
     Orders savedOrder = orderRepository.save(orders);
+
+    OrderEvent orderEvent = OrderEvent.builder()
+                                      .orderId(savedOrder.getId())
+                                      .userId(savedOrder.getUser().getId())
+                                      .placedAt(savedOrder.getPlacedAt())
+                                      .orderItems(
+                                              savedOrder.getOrderItems().stream()
+                                                      .map(itemOrdered -> OrderItemEvent.builder().variantId(itemOrdered.getVariant().getId())
+                                                              .sku(itemOrdered.getVariant().getSku())
+                                                              .quantity(itemOrdered.getQuantity())
+                                                              .build())
+                                                      .collect(Collectors.toList()))
+                                     .build();
+    kafkaTemplate.send(
+            KafkaTopicConfig.ORDER_EVENTS_TOPIC, String.valueOf(savedOrder.getId()), orderEvent);
+        log.info("Created order and published event: orderId = {}", savedOrder.getId());
+
     return orderMapper.toDto(savedOrder);
   }
 
