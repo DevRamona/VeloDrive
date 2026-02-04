@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import com.ramona.capstone.dtos.ProductRequestDto;
+import com.ramona.capstone.dtos.ProductResponseDto;
 import com.ramona.capstone.dtos.VariantDto;
+import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.entities.Brand;
 import com.ramona.capstone.entities.Category;
 import com.ramona.capstone.entities.Product;
@@ -41,7 +44,7 @@ class ProductServiceTest {
   @DisplayName("Should save a product and add variants successfully")
   void createProduct_Success() {
 
-    ProductDto request = createRequest("Hyundai Elantra", "HONDA-BLK");
+    ProductRequestDto request = createRequest("Hyundai Elantra", "HONDA-BLK");
 
     Category category = new Category();
     category.setId(1L);
@@ -69,7 +72,7 @@ class ProductServiceTest {
     savedProduct.setCategory(category);
     savedProduct.setBrand(brand);
 
-    ProductDto response = new ProductDto();
+    ProductResponseDto response = new ProductResponseDto();
     response.setId(1L);
     response.setName("Hyundai Elantra");
 
@@ -80,7 +83,7 @@ class ProductServiceTest {
     when(productRepository.save(any(Product.class))).thenReturn(savedProduct);
     when(productMapper.toDto(savedProduct)).thenReturn(response);
 
-    ProductDto result = productService.createProduct(request);
+    ProductResponseDto result = productService.createProduct(request);
 
     assertNotNull(result);
     assertEquals("Hyundai Elantra", result.getName());
@@ -92,7 +95,7 @@ class ProductServiceTest {
   @DisplayName("Should rollback when there is duplicate SKU")
   void createProduct_DuplicateSku_RollsBack() {
 
-    ProductDto request = createRequest("Hyundai Elantra", "HONDA-BLK");
+    ProductRequestDto request = createRequest("Hyundai Elantra", "HONDA-BLK");
 
     Category category = new Category();
     category.setId(1L);
@@ -120,15 +123,15 @@ class ProductServiceTest {
     verify(productRepository, never()).save(any());
   }
 
-  private ProductDto createRequest(String name, String sku) {
-    ProductDto dto = new ProductDto();
+  private ProductRequestDto createRequest(String name, String sku) {
+    ProductRequestDto dto = new ProductRequestDto();
     dto.setName(name);
     dto.setCategoryName("Sedans");
     dto.setBrandName("Hyundai");
     dto.setDescription("Fuel efficient sedan");
     dto.setBasePrice(new BigDecimal("25000"));
 
-    VariantDto variant = new VariantDto();
+    VariantRequestDto variant = new VariantRequestDto();
     variant.setSku(sku);
     variant.setPrice(new BigDecimal("24500"));
     dto.setVariants(List.of(variant));
