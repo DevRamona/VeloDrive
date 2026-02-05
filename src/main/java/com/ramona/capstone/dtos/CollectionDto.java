@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CollectionDto {
   private String name;
-  private List<ProductDto> product = new ArrayList<>();
+  private List<ProductResponseDto> product = new ArrayList<>();
 }

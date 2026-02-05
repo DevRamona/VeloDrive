@@ -1,6 +1,7 @@
 package com.ramona.capstone.services;
 
-import com.ramona.capstone.dtos.ProductDto;
+import com.ramona.capstone.dtos.ProductRequestDto;
+import com.ramona.capstone.dtos.ProductResponseDto;
 import com.ramona.capstone.entities.Brand;
 import com.ramona.capstone.entities.Category;
 import com.ramona.capstone.entities.Product;
@@ -26,17 +27,17 @@ public class ProductService {
   private final CategoryRepository categoryRepository;
   private final VariantRepository variantRepository;
 
-  public List<ProductDto> getProductsByCategory(Long categoryId) {
+  public List<ProductResponseDto> getProductsByCategory(Long categoryId) {
     return productRepository.findByCategoryId(categoryId).stream()
         .map(productMapper::toDto)
         .toList();
   }
 
-  public List<ProductDto> getAllProducts() {
+  public List<ProductResponseDto> getAllProducts() {
     return productRepository.findAll().stream().map(productMapper::toDto).toList();
   }
 
-  public ProductDto getProductById(Long id) {
+  public ProductResponseDto getProductById(Long id) {
     return productRepository
         .findById(id)
         .map(productMapper::toDto)
@@ -44,7 +45,7 @@ public class ProductService {
   }
 
   @Transactional
-  public ProductDto createProduct(ProductDto productDto) {
+  public ProductResponseDto createProduct(ProductRequestDto productDto) {
     Category category =
         categoryRepository
             .findByName(productDto.getCategoryName())
@@ -78,7 +79,7 @@ public class ProductService {
   }
 
   @Transactional
-  public ProductDto updateProduct(Long id, ProductDto productDto) {
+  public ProductResponseDto updateProduct(Long id, ProductRequestDto productDto) {
     Product product =
         productRepository
             .findById(id)
