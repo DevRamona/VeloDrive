@@ -12,8 +12,8 @@ public interface ProductMapper {
   @Mapping(source = "brand.name", target = "brandName")
   ProductResponseDto toDto(Product product);
 
-  @Mapping( target = "id", ignore = true)
-  @Mapping( target = "brand", ignore = true)
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "brand", ignore = true)
   @Mapping(target = "category", ignore = true)
   Product toEntity(ProductRequestDto productDto);
 }

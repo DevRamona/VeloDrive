@@ -1,5 +1,6 @@
 package com.ramona.capstone.entities;
 
+import com.ramona.capstone.models.OrderStatus;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,6 +29,10 @@ public class Orders {
 
   @Column(name = "placed_at")
   private LocalDateTime placedAt;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private OrderStatus status = OrderStatus.PENDING;
 
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<OrderItems> orderItems = new ArrayList<>();

@@ -17,7 +17,8 @@ public class ProductController {
   private final ProductService productService;
 
   @GetMapping("/category/{categoryId}")
-  public ResponseEntity<List<ProductResponseDto>> getProductsByCategory(@PathVariable Long categoryId) {
+  public ResponseEntity<List<ProductResponseDto>> getProductsByCategory(
+      @PathVariable Long categoryId) {
     return ResponseEntity.ok(productService.getProductsByCategory(categoryId));
   }
 
@@ -32,7 +33,8 @@ public class ProductController {
   }
 
   @PostMapping
-  public ResponseEntity<ProductResponseDto> addProduct(@Valid @RequestBody ProductRequestDto productDto) {
+  public ResponseEntity<ProductResponseDto> addProduct(
+      @Valid @RequestBody ProductRequestDto productDto) {
     return new ResponseEntity<>(productService.createProduct(productDto), HttpStatus.CREATED);
   }
 

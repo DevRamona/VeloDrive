@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemEvent {
-    @NotNull(message = "Variant ID is required")
-    private Long variantId;
+  @NotNull(message = "Variant ID is required")
+  private Long variantId;
 
-    @NotBlank(message="SKU is required")
-    private String sku;
+  @NotBlank(message = "SKU is required")
+  private String sku;
 
-    @NotNull(message = "Quantity is required")
-    @Positive(message = "Message must be greater than zero")
-    private Integer quantity;
+  @NotNull(message = "Quantity is required")
+  @Positive(message = "Message must be greater than zero")
+  private Integer quantity;
 }

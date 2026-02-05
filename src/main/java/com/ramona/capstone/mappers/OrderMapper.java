@@ -11,6 +11,8 @@ import org.mapstruct.Mapping;
 public interface OrderMapper {
   @Mapping(source = "user.id", target = "userId")
   @Mapping(source = "user.email", target = "userEmail")
+  @Mapping(source = "id", target = "id")
+  @Mapping(source = "status", target = "status")
   OrderResponseDto toDto(Orders orders);
 
   @Mapping(source = "variant.id", target = "variantId")

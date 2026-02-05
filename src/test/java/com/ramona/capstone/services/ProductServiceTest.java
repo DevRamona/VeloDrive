@@ -6,7 +6,6 @@ import static org.mockito.Mockito.*;
 
 import com.ramona.capstone.dtos.ProductRequestDto;
 import com.ramona.capstone.dtos.ProductResponseDto;
-import com.ramona.capstone.dtos.VariantDto;
 import com.ramona.capstone.dtos.VariantRequestDto;
 import com.ramona.capstone.entities.Brand;
 import com.ramona.capstone.entities.Category;
